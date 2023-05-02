@@ -14,6 +14,22 @@ const port =5000;
  app.get('/news',(req,res)=>{
     res.send(news)
  })
+ app.get('/news/:id',(req,res)=>{
+   const id=req.params.id;
+   const selectedNews=news.find(n=>n._id===id)
+   res.send(selectedNews)
+ })
+ app.get('/category/:id',(req,res)=>{
+   const id=parseInt(req.params.id);
+   
+   if(id){
+      const selectedNewsCategory=news.filter(n=>parseInt(n.category_id)===id)
+      res.send(selectedNewsCategory)
+   }
+   else
+       res.send(news)
+ })
+
  app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
